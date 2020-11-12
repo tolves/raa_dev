@@ -86,4 +86,5 @@ production:
   # database: raa_dev_production
   # username: raa_dev
   # password: <%= ENV['RAA_DEV_DATABASE_PASSWORD'] %>
-  url: <%= ENV['DATABASE_URL'] %>
+  # url: <%= ENV['DATABASE_URL'] %>
+  url: postgres://alstkcokcjxvvq:07eda17eb0139445463facf4b95903d95d3d249fe3d0015a42338f313e9c2d60@ec2-46-137-124-19.eu-west-1.compute.amazonaws.com:5432/de7p8rmh17dipk
