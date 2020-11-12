@@ -1,4 +1,16 @@
-<h2>Hello World</h2>
+<h1>Welcome</h1>
+<% if logged_in? %>
+    <h1>You are Logged In, <%= current_user.name %></h1>
+<%end%>
+<% if !session[:user_id]%>
+  <%= button_to "Login", '/login', method: :get%>
+<%end%>
+<%= button_to "Sign Up", '/users/new', method: :get%>
+
 <p>
-  The time is now: <%= Time.now %>
+  <%= link_to :users, users_path%>
+</p>
+
+<p>
+  <%= link_to :login, login_path%>
 </p>
