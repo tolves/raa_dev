@@ -19,24 +19,26 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # pool: 5
   
 
 development:
   <<: *default
-  database: raa_dev_development
+  url: postgres://alstkcokcjxvvq:07eda17eb0139445463facf4b95903d95d3d249fe3d0015a42338f313e9c2d60@ec2-46-137-124-19.eu-west-1.compute.amazonaws.com:5432/de7p8rmh17dipk
+
+  # database: raa_dev_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  username: <%= Rails.application.credentials.development[:username] %>
+  # username: <%= Rails.application.credentials.development[:username] %>
 
   # EDITOR=vim bin/rails credentials:edit
 
   # The password associated with the postgres role (username).
-  password: <%= Rails.application.credentials.development[:password] %>
+  # password: <%= Rails.application.credentials.development[:password] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
