@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: raa_dev_production
-  username: raa_dev
-  password: <%= ENV['RAA_DEV_DATABASE_PASSWORD'] %>
+  # database: raa_dev_production
+  # username: raa_dev
+  # password: <%= ENV['RAA_DEV_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
