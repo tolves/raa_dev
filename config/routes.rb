@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
-  get 'authorized', to: 'sessions#page_requires_login'
+  post 'sign_out', to: 'sessions#sign_out'
+  get 'permission_restriction', to: 'users#permission_restriction'
 end
