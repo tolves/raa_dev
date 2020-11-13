@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
   before_action :permission_restrict, only: [:show, :update, :destroy]
+
   def index
     @user = User.first
 
@@ -21,7 +22,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.password, @user.salts = helpers.hash_password @user.password
     if @user.save
       flash.notice = 'Register User Success'
       session[:user_id] = @user.id
@@ -38,21 +38,14 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(session[:user_id])
-    @user.password, @user.salts = helpers.hash_password params[:user][:password]
+      @user.password, @user.email = user_params[:password], user_params[:email]
     if @user.save
-      flash.notice = 'Change password successful'
+      flash.notice = 'Change Profiles Successful'
       redirect_to :user
     else
       flash.notice = @user.errors.messages
       render 'edit'
     end
-  end
-
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-   
-    redirect_to :users
   end
 
   def permission_restriction
@@ -61,13 +54,8 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :password, :terms_of_service)
+    params.require(:user).permit(:name, :password, :email, :terms_of_service)
   end
-
-  def user_password_params
-    params.require(:user).permit(:password)
-  end
-
   
   def permission_restrict
     redirect_to :permission_restriction if session[:user_id] != params[:id].to_i
