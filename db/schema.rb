@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_12_230336) do
+ActiveRecord::Schema.define(version: 2020_11_13_193451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admin", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "password", limit: 32, null: false
+    t.string "salts", limit: 32, null: false
+  end
 
   create_table "products", force: :cascade do |t|
     t.uuid "identifier"
