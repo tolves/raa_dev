@@ -9,9 +9,16 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= render 'layouts/header' %>
+    <% if session[:admin_id] %>
+      <%= render 'admins/header' %>
+    <%else%>
+      <%= render 'layouts/header' %>
+    <%end%>
+    <% flash.each do |type, msg| %>
+      <p><%= msg %></p>
+    <% end %>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
-  
+  <%console%>
 </html>

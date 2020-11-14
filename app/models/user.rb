@@ -31,11 +31,6 @@ class User < ApplicationRecord
 
   before_save :encrypt_password
 
-  def authenticate(password)
-    return true if self.password == Digest::MD5.hexdigest(password + self.salts)
-    false
-  end
-
   def encrypt_password
     if password.present?
       self.salts = SecureRandom.hex

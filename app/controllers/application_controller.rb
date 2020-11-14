@@ -24,5 +24,4 @@ class ApplicationController < ActionController::Base
   def admin_authorized
     redirect_to :admin_login unless is_admin?
   end
-
 end

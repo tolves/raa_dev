@@ -7,12 +7,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_name params[:username]
+    @user = User.find_by_name params[:name]
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to :root
     else
-      flash.notice = 'Incorrect password'
+      flash.notice = 'Incorrect Password'
       redirect_to :login
     end
   end

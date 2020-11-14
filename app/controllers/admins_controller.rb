@@ -1,8 +1,6 @@
 class AdminsController < ApplicationController
-  helper_method :current_admin
-  helper_method :is_admin?
   skip_before_action :authorized
-  before_action :admin_authorized, except: [:login, :login_auth, :sign_out,] 
+  before_action :admin_authorized, except: [:login, :login_auth, :sign_out,]
   def index
   end
 
@@ -10,7 +8,7 @@ class AdminsController < ApplicationController
   end
 
   def login_auth
-    @admin = Admin.find_by_name params[:username]
+    @admin = Admin.find_by_name params[:name]
     if @admin && @admin.authenticate(params[:password])
       session[:admin_id] = @admin.id
       redirect_to :admins
@@ -21,8 +19,11 @@ class AdminsController < ApplicationController
   end
 
   def sign_out
+    session[:admin_id] = nil
+    redirect_to :root
   end
 
   private
-
+  def login_params
+  end
 end
