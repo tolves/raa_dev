@@ -15,7 +15,7 @@
           <%= button_to 'Sign Up', :new_user, method: :get%>
         <% else %>
           <%= button_to 'My account', user_path(session[:user_id]) ,method: :get%>
-          <%= button_to 'Sign Out', :sign_out, method: :post%></td>
+          <%= button_to :Logout, :logout, method: :post%></td>
         <%end%>
       </td>
     </tr>

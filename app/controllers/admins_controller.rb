@@ -18,7 +18,7 @@ class AdminsController < ApplicationController
     end
   end
 
-  def sign_out
+  def logout
     session[:admin_id] = nil
     redirect_to :root
   end
