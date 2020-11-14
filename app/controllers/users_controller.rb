@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash.notice = 'Register User Success'
+      flash.notice = 'Register User Successful'
       session[:user_id] = @user.id
       redirect_to :root
     else
