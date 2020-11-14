@@ -3,7 +3,7 @@ class Admin::ProductsController < ApplicationController
   skip_before_action :authorized
 
   def index
-    @products = Product.first
+    @products = Product.all
   end
 
   def new
@@ -20,6 +20,9 @@ class Admin::ProductsController < ApplicationController
       flash.notice = @product.errors
       redirect_to :new_admin_product
     end
+  end
+
+  def edit
   end
 
   def update

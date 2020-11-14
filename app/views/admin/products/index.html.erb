@@ -1,9 +1,18 @@
-<%= @products.inspect %>
 <p><%= button_to :new_product, :new_admin_product, method: :get %> </p>
 <table>
   <tr>
-    <td>
-    </td>
+    <th>Name</th>
+    <th>brand</th>
+    <th>categories</th>
+    <th>types</th>
   </tr>
-
+  <% @products.each do |product| %>
+  <tr>
+    <td><%= link_to product.name, admin_product_path(product) %></td>
+    <td><%= product.brand %></td>
+    <td><%= product.categories %></td>
+    <td><%= product.types %></td>
+    <td><%= button_to :edit, edit_admin_product_path(product), method: :get%>
+  </tr>
+  <% end %>
 </table>
