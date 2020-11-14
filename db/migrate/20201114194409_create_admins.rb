@@ -1,6 +1,6 @@
-class AddAdminTable < ActiveRecord::Migration[6.0]
+class CreateAdmins < ActiveRecord::Migration[6.0]
   def change
-    create_table :admins do |t|
+    create_table :admin do |t|
       t.string :name, unique: true, null: false
       t.string :password, :limit => 32, null: false
       t.string :salts, :limit => 32, null: false

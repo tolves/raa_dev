@@ -4,14 +4,18 @@ Rails.application.routes.draw do
   root 'index#index'
   resources :users
   resources :products
-  resources :admins
+  namespace :admin do
+    resources :products
+  end
+
+  get 'admin', to: 'admin#index'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   post 'logout', to: 'sessions#logout'
   get 'permission_restriction', to: 'users#permission_restriction'
 
-  get 'admin_login', to: 'admins#login'
-  post 'admin_login', to: 'admins#login_auth'
-  post 'admin_logout', to: 'admins#logout'
+  get 'admin_login', to: 'admin#login'
+  post 'admin_login', to: 'admin#login_auth'
+  post 'admin_logout', to: 'admin#logout'
 end
