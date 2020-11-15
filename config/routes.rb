@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'index#index'
   resources :users
-  # resources :products
+  resources :products
   namespace :admin do
     resources :products
     resources :brands
