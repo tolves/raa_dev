@@ -12,12 +12,12 @@
     <%= f.text_field :price %>
   </p>
   <p>
-    <%= f.label :brand %><br>
-    <%= f.text_field :brand %>
-  </p>
-  <p>
-    <%= f.label :categories %><br>
-    <%= f.text_field :categories %>
+    <%= f.label :brands_id %><br>
+    <%= f.select(:brands_id) do %>
+      <% @brands.each do |b| %>
+        <%= content_tag(:option, b.name, value: b.id) %>
+      <% end %>
+    <% end %>
   </p>
   <p>
     <%= f.label :types %><br>

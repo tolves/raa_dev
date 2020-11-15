@@ -1,4 +1,4 @@
-<p><%= button_to :new_product, :new_admin_product, method: :get %> </p>
+<p><%= button_to :new_product, :new_admin_product, method: :get %> <%= button_to :new_brand, :new_admin_brand, method: :get %> <%= button_to :new_category, :new_admin_category, method: :get %> </p>
 <table>
   <tr>
     <th>Name</th>
@@ -10,7 +10,7 @@
   <tr>
     <td><%= link_to product.name, admin_product_path(product) %></td>
     <td><%= product.brand %></td>
-    <td><%= product.categories %></td>
+    <td><%= product.category %></td>
     <td><%= product.types %></td>
     <td><%= button_to :edit, edit_admin_product_path(product), method: :get%>
   </tr>
