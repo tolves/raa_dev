@@ -5,7 +5,6 @@ class Admin::ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    @a = Product.last
   end
 
   def new

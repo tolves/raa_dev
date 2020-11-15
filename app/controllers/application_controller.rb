@@ -11,8 +11,17 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !current_user.nil?  
   end
+
   def authorized
-    redirect_to :root unless logged_in?
+    return if is_admin?
+    unless logged_in?
+      flash.notice = 'Login Please'
+      return redirect_to :login 
+    end
+    if current_user != User.find_by_id(params[:id])
+      flash.alert = 'You do not have enough permission'
+      redirect_to :permission_restriction 
+    end
   end
 
   def current_admin

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create]
-  before_action :permission_restrict, only: [:show, :update, :destroy]
+  skip_before_action :authorized, only: [:new, :create, :permission_restriction]
+  # before_action :permission_restrict, only: [:show, :edit, :update, :destroy, :index]
 
   def index
     @user = User.first
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    @user = User.find(params[:id])
 
   end
 
@@ -33,11 +33,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(session[:user_id])
+    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(session[:user_id])
+    @user = User.find(params[:id])
       @user.password, @user.email = user_params[:password], user_params[:email]
     if @user.save
       flash.notice = 'Change Profiles Successful'
@@ -55,9 +55,5 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name, :password, :email, :terms_of_service)
-  end
-  
-  def permission_restrict
-    redirect_to :permission_restriction if session[:user_id] != params[:id].to_i
   end
 end
