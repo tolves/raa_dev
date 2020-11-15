@@ -4,10 +4,6 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </p>
-  <p>
     <%= f.label :brand_id %><br>
     <%= f.select(:brand_id, @brands.map{|i| [i.name, i.id]}) %>
   </p>
