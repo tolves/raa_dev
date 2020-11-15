@@ -3,14 +3,14 @@ Rails.application.routes.draw do
 
   root 'index#index'
   resources :users
-  resources :products
+  # resources :products
   namespace :admin do
     resources :products
     resources :brands
     resources :categories
   end
 
-  post 'admin/products/:id', to: 'admin/products#update', constraints: { id: /[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/}
+  post 'admin/products/:id', to: 'admin/products#create'
 
   get 'admin', to: 'admin#index'
 

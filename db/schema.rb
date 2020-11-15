@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_172205) do
+ActiveRecord::Schema.define(version: 2020_11_15_180806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -37,17 +37,16 @@ ActiveRecord::Schema.define(version: 2020_11_15_172205) do
   end
 
   create_table "prices", force: :cascade do |t|
-    t.bigint "product_id"
     t.string "seller"
     t.string "link"
     t.json "price"
     t.integer "best_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_prices_on_product_id"
+    t.integer "product_id"
   end
 
-  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "products", id: :integer, default: nil, force: :cascade do |t|
     t.string "name"
     t.string "types"
     t.datetime "created_at", precision: 6, null: false
@@ -55,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_172205) do
     t.string "detail"
     t.bigint "brand_id"
     t.bigint "category_id"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
