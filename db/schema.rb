@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_131532) do
+ActiveRecord::Schema.define(version: 2020_11_15_154808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -43,10 +43,10 @@ ActiveRecord::Schema.define(version: 2020_11_15_131532) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "detail"
-    t.bigint "brands_id"
-    t.bigint "categories_id"
-    t.index ["brands_id"], name: "index_products_on_brands_id"
-    t.index ["categories_id"], name: "index_products_on_categories_id"
+    t.bigint "brand_id"
+    t.bigint "category_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,4 +59,6 @@ ActiveRecord::Schema.define(version: 2020_11_15_131532) do
     t.string "email"
   end
 
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "categories"
 end

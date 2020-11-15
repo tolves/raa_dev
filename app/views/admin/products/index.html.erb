@@ -9,8 +9,8 @@
   <% @products.each do |product| %>
   <tr>
     <td><%= link_to product.name, admin_product_path(product) %></td>
-    <td><%= product.brand %></td>
-    <td><%= product.category %></td>
+    <td><%= product.brand.name %></td>
+    <td><%= product.category.name %></td>
     <td><%= product.types %></td>
     <td><%= button_to :edit, edit_admin_product_path(product), method: :get%>
   </tr>

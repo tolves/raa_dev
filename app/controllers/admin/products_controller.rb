@@ -4,18 +4,20 @@ class Admin::ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    @a = Product.last
   end
 
   def new
     @product = Product.new
     @brands = Brand.all
+    @categories = Category.all
   end
 
   def create
     @product = Product.new(product_params)
+    puts @product.inspect
     if @product.save
       flash.notice = 'Add Product successful'
-      # session[:user_id] = @user.id
       redirect_to :admin_products
     else
       flash.notice = @product.errors
@@ -34,6 +36,6 @@ class Admin::ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :price, :brand, :categories, :types, :detail)
+    params.require(:product).permit(:name, :price, :brand_id, :category_id, :types, :detail)
   end
 end

@@ -1,0 +1,14 @@
+<%= form_for @product do |f| %>
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :email%><br>
+    <%= f.text_field :email%>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

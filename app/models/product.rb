@@ -1,13 +1,9 @@
 class Product < ApplicationRecord
   validates :name, presence: true, length: { minimum: 2 }
-  # validates :brand 
-  # validates :categories
-  # validates :categories
-  # validates :types
-  # validates :detail
-
-  # belongs_to :brand  add_reference :products, :brand t.belongs_to :author
   belongs_to :brand
   belongs_to :category
+
+  # belongs_to :brand  add_reference :products, :brand t.belongs_to :author
+
   # has_many :price
 end
