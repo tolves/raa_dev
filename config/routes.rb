@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :categories
   end
 
+  post 'admin/products/:id', to: 'admin/products#update', constraints: { id: /[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/}
+
   get 'admin', to: 'admin#index'
 
   get 'login', to: 'sessions#new'
