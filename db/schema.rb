@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_180806) do
+ActiveRecord::Schema.define(version: 2020_11_15_183524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -43,10 +43,11 @@ ActiveRecord::Schema.define(version: 2020_11_15_180806) do
     t.integer "best_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "product_id"
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_prices_on_product_id"
   end
 
-  create_table "products", id: :integer, default: nil, force: :cascade do |t|
+  create_table "products", id: :integer, default: -> { "nextval('products_colname_seq'::regclass)" }, force: :cascade do |t|
     t.string "name"
     t.string "types"
     t.datetime "created_at", precision: 6, null: false
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_180806) do
     t.string "email"
   end
 
+  add_foreign_key "prices", "products"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
 end
