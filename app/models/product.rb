@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   # validates :detail
 
   # belongs_to :brand  add_reference :products, :brand t.belongs_to :author
-  # belongs_to :category
+  belongs_to :brand
+  belongs_to :category
   # has_many :price
 end
