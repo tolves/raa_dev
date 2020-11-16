@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :users
   resources :products
   namespace :admin do
-    resources :products
+    resources :products do
+      resources :prices
+    end
     resources :brands
     resources :categories
   end
