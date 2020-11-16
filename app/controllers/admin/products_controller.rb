@@ -6,21 +6,24 @@ class Admin::ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @price = @product.price.build
+    @prices = @product.prices.build
   end
 
   def create
     @product = Product.new(product_params)
-    @price = @product.price.create(:price=>10)
-    puts @product.inspect
-    puts @price.inspect
-    # if @product.save
-      # flash.notice = 'Add Product successful'
-      # redirect_to :admin_products
-    # else
-      # flash.notice = @product.errors
-      # redirect_to :new_admin_product
-    # end
+    @price = @product.prices.build(
+      :seller=>price_params[:price][:seller], 
+      :link => price_params[:price][:link],
+      :price => [Time.now => price_params[:price][:price]]
+    )
+    
+    if @product.save && @price.save
+      flash.notice = 'Add Product successful'
+      redirect_to :admin_products
+    else
+      flash.notice = @product.errors.messages.to_s + @price.errors.messages.to_s
+      redirect_to :new_admin_product
+    end
   end
 
   def edit
@@ -47,6 +50,6 @@ class Admin::ProductsController < ApplicationController
   end
 
   def price_params
-    params.require(:product).permit(:price)
+    params.require(:product).permit(:price =>[:price, :seller, :link])
   end
 end
