@@ -1,5 +1,4 @@
 class Admin::ProductsController < ApplicationController
-  before_action :brands, :categories, only: [:new, :edit]
 
   def index
     @products = Product.all
@@ -7,17 +6,21 @@ class Admin::ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @price = @product.price.build
   end
 
   def create
     @product = Product.new(product_params)
-    if @product.save
-      flash.notice = 'Add Product successful'
-      redirect_to :admin_products
-    else
-      flash.notice = @product.errors
-      redirect_to :new_admin_product
-    end
+    @price = @product.price.create(:price=>10)
+    puts @product.inspect
+    puts @price.inspect
+    # if @product.save
+      # flash.notice = 'Add Product successful'
+      # redirect_to :admin_products
+    # else
+      # flash.notice = @product.errors
+      # redirect_to :new_admin_product
+    # end
   end
 
   def edit
@@ -40,14 +43,10 @@ class Admin::ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :price, :brand_id, :category_id, :types, :detail)
+    params.require(:product).permit(:name, :brand_id, :category_id, :types, :detail)
   end
 
-  def brands
-    @brands = Brand.all
-  end
-
-  def categories
-    @categories = Category.all
+  def price_params
+    params.require(:product).permit(:price)
   end
 end
