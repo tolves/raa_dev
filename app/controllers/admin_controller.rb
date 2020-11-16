@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
-  skip_before_action :authorized
-  before_action :admin_authorized, except: [:login, :login_auth, :sign_out,]
+  skip_before_action :authorized ,except: :index
+  skip_before_action :check_permission ,except: :index
   def index
   end
 
@@ -11,6 +11,7 @@ class AdminController < ApplicationController
     @admin = Admin.find_by_name params[:name]
     if @admin && @admin.authenticate(params[:password])
       session[:admin_id] = @admin.id
+      session[:user_id] = nil
       redirect_to :admin
     else
       flash.notice = 'Incorrect password'

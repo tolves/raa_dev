@@ -10,16 +10,16 @@ Rails.application.routes.draw do
     resources :categories
   end
 
-  post 'admin/products/:id', to: 'admin/products#create'
+  # post 'admin/products/:id', to: 'admin/products#create'
 
   get 'admin', to: 'admin#index'
 
-  get 'login', to: 'sessions#new'
+  get 'login', to: 'sessions#login'
   post 'login', to: 'sessions#create'
   post 'logout', to: 'sessions#logout'
-  get 'permission_restriction', to: 'users#permission_restriction'
+  get 'permission_restriction', to: 'sessions#permission_restriction'
 
-  get 'admin_login', to: 'admin#login'
-  post 'admin_login', to: 'admin#login_auth'
-  post 'admin_logout', to: 'admin#logout'
+  get 'admin/login', to: 'admin#login'
+  post 'admin/login', to: 'admin#login_auth'
+  post 'admin/logout', to: 'admin#logout'
 end

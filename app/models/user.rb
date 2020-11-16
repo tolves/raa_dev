@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-
+  attribute :role #:is_admin?
+  attribute :is_admin?
   validates_uniqueness_of :name, :email
 
   validates :name, presence: true, length: { in: 2..32 }
@@ -36,5 +37,13 @@ class User < ApplicationRecord
       self.salts = SecureRandom.hex
       self.password = Digest::MD5.hexdigest(password + salts)
     end
+  end
+
+  def role
+    :user
+  end
+
+  def is_admin?
+    false
   end
 end

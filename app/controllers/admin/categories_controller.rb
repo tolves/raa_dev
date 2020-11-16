@@ -1,6 +1,4 @@
 class Admin::CategoriesController < ApplicationController
-  before_action :admin_authorized
-  skip_before_action :authorized
   def new
     @category = Category.new
   end

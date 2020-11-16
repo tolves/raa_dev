@@ -1,7 +1,5 @@
 class Admin::ProductsController < ApplicationController
-  before_action :admin_authorized
   before_action :brands, :categories, only: [:new, :edit]
-  skip_before_action :authorized
 
   def index
     @products = Product.all

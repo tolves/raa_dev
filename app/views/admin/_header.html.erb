@@ -5,8 +5,8 @@
         <%= link_to :Index, :root %>
       </td>
       <td>
-        <% if is_admin? %>
-          <h1>You are Logged In, <%= current_admin.name %></h1>
+        <% if current_user.is_admin? %>
+          <h1>You are Logged In, <%= current_user.name %></h1>
           <%= button_to 'Sign Out', :admin_logout, method: :post%></td>
         <%end%>
       </td>

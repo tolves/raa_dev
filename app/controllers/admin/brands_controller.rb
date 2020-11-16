@@ -1,6 +1,4 @@
 class Admin::BrandsController < ApplicationController
-  before_action :admin_authorized
-  skip_before_action :authorized
   def new
     @brand = Brand.new
   end

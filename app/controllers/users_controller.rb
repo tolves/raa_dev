@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create, :permission_restriction]
-  # before_action :permission_restrict, only: [:show, :edit, :update, :destroy, :index]
 
   def index
     @user = User.first
@@ -47,10 +45,6 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-
-  def permission_restriction
-  end
-
 
   private
   def user_params

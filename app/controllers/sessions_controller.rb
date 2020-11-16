@@ -1,9 +1,8 @@
 class SessionsController < ApplicationController
   skip_before_action :authorized
-  def welcome
-  end
+  skip_before_action :check_permission
 
-  def new
+  def login
   end
 
   def create
@@ -20,6 +19,10 @@ class SessionsController < ApplicationController
   def logout
     session[:user_id] = nil
     redirect_to :root
+  end
+
+  
+  def permission_restriction
   end
 
   private
