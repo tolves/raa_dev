@@ -1,1 +1,4 @@
-<%= @product.inspect%>
+<%= @product.inspect%><br>
+<% @product.prices.each do |p| %>
+<%= p.price %><br>
+<%end%>

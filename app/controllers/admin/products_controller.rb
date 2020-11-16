@@ -14,7 +14,7 @@ class Admin::ProductsController < ApplicationController
     @price = @product.prices.build(
       :seller=>price_params[:price][:seller], 
       :link => price_params[:price][:link],
-      :price => [Time.now => price_params[:price][:price]]
+      :price => {Time.now => price_params[:price][:price]}
     )
     
     if @product.save && @price.save
@@ -28,11 +28,17 @@ class Admin::ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    @prices = @product.prices.build
   end
 
   def update
     @product = Product.find(params[:id])
-    if @product.update(product_params)
+    @price = @product.prices.build(
+      :seller=>price_params[:price][:seller], 
+      :link => price_params[:price][:link],
+      :price => {Time.now => price_params[:price][:price] }
+    )
+    if @product.update(product_params) && @price.save
       flash.notice = 'Change Product Details Successful'
       redirect_to :admin_products
     else
@@ -42,6 +48,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
   end
 
   private

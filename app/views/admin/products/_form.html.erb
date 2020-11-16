@@ -1,28 +1,41 @@
-<%= form_with model: product, url: path, method: :post do |f| %>
+<%= form_with model: product, url: path, method: method do |f| %>
   <p>
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, placeholder: "Add The Product Name" %>
   </p>
   <p>
     <%= f.label :brand_id %><br>
-    <%= f.select(:brand_id, @brands.map{|i| [i.name, i.id]}) %>
+    <%= f.collection_select :brand_id, Brand.all, :id, :name, prompt: "Pick a Brands" %>
   </p>
   <p>
     <%= f.label :category_id %><br>
-    <%= f.select(:category_id, @categories.map{|i| [i.name, i.id]}) %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Pick a Category" %>
+    <%# <%= f.select(:category_id, @categories.map{|i| [i.name, i.id]}) %>
   </p>
   <p>
     <%= f.label :types %><br>
-    <%= f.text_field :types %>
+    <%= f.text_field :types, placeholder: "Add The Product Type"  %>
   </p>
   <p>
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-    <%# <%= product.price[0].price[:change.to_s]%>
+    <%= f.fields_for @prices do |p| %> 
+    <p>
+      <%= p.label :price %> <br>
+      <%= p.text_field :price, placeholder: "Add A New Price" %>
+    </p>
+    <p>
+      <%= p.label :seller %> <br>
+      <%= p.text_field :seller, placeholder: "Add A New seller" %>
+    </p>
+    <p>
+      <%= p.label :link %> <br>
+      <%= p.text_field :link, placeholder: "Add A New link" %>
+    </p>
+    <% end %>
+
   </p>
   <p>
     <%= f.label :detail %><br>
-    <%= f.text_field :detail %>
+    <%= f.text_field :detail, placeholder: "Add The Product Details"  %>
   </p>
     <%= f.submit %>
   </p>
