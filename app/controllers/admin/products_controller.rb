@@ -11,9 +11,9 @@ class Admin::ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @price = @product.prices.build(seller: price_params[:price][:seller], link: price_params[:price][:link], price: {Time.now => price_params[:price][:price]})
+    @price = @product.prices.build(price_params)
 
-    if @product.save && @price.save
+    if @product.save
       flash.notice = 'Add Product successful'
       redirect_to :admin_products
     else
@@ -29,12 +29,7 @@ class Admin::ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    @price = @product.prices.build(
-        seller: price_params[:price][:seller],
-        link: price_params[:price][:link],
-        price: {Time.now => price_params[:price][:price]}
-    )
-    if @product.update(product_params) && @price.save
+    if @product.update(product_params)
       flash.notice = 'Change Product Details Successful'
       redirect_to :admin_products
     else
@@ -48,11 +43,20 @@ class Admin::ProductsController < ApplicationController
   end
 
   private
+
   def product_params
     params.require(:product).permit(:name, :brand_id, :category_id, :types, :detail)
   end
 
-  def price_params
+  def origin_price_params
     params.require(:product).permit(price: %i[price seller link])
+  end
+
+  def price_params
+    {
+        seller: origin_price_params[:price][:seller],
+        link: origin_price_params[:price][:link],
+        price: origin_price_params[:price][:price]
+    }
   end
 end

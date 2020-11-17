@@ -14,29 +14,15 @@
   </p>
   <p>
     <%= f.label :types %><br>
-    <%= f.text_field :types, placeholder: "Add The Product Type"  %>
+    <%= f.text_field :types, placeholder: "Add The Product Type" %>
   </p>
-  <p>
-    <%= f.fields_for @prices do |p| %> 
-    <p>
-      <%= p.label :price %> <br>
-      <%= p.text_field :price, placeholder: "Add A New Price" %>
-    </p>
-    <p>
-      <%= p.label :seller %> <br>
-      <%= p.text_field :seller, placeholder: "Add A New seller" %>
-    </p>
-    <p>
-      <%= p.label :link %> <br>
-      <%= p.text_field :link, placeholder: "Add A New link" %>
-    </p>
-    <% end %>
-
-  </p>
+  <% if action_name == 'new' %>
+    <%= render partial: 'price', locals: {price: @prices, f: f} %>
+  <% end %>
   <p>
     <%= f.label :detail %><br>
-    <%= f.text_field :detail, placeholder: "Add The Product Details"  %>
+    <%= f.text_field :detail, placeholder: "Add The Product Details" %>
   </p>
-    <%= f.submit %>
+  <%= f.submit %>
   </p>
 <% end %>
