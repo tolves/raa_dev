@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :authorized, on: %i[new create]
+  skip_before_action :check_permission, on: %i[new create]
 
   def index
     @user = User.all

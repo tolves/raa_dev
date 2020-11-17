@@ -34,10 +34,9 @@ class User < ApplicationRecord
   before_save :encrypt_password
 
   def encrypt_password
-    if password.present?
-      self.salts = SecureRandom.hex
-      self.password = Digest::MD5.hexdigest(password + salts)
-    end
+    return unless password.present?
+    self.salts = SecureRandom.hex
+    self.password = Digest::MD5.hexdigest(password + salts)
   end
 
   def role
