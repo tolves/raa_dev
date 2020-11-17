@@ -1,7 +1,7 @@
 class Admin::ProductsController < ApplicationController
 
   def index
-    @products = Product.all
+    @products = Product.all.order(updated_at: :desc)
   end
 
   def new
@@ -11,12 +11,8 @@ class Admin::ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @price = @product.prices.build(
-        seller: price_params[:price][:seller],
-        link: price_params[:price][:link],
-        price: {Time.now => price_params[:price][:price]}
-    )
-    
+    @price = @product.prices.build(seller: price_params[:price][:seller], link: price_params[:price][:link], price: {Time.now => price_params[:price][:price]})
+
     if @product.save && @price.save
       flash.notice = 'Add Product successful'
       redirect_to :admin_products

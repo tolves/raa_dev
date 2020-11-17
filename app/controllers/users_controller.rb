@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    @user = User.first
+    @user = User.all
 
     respond_to do |format|
       format.json { render json: @user }
