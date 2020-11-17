@@ -1,11 +1,11 @@
-<%= form_with model: @price, url: admin_product_price_path(@product, @price), method: :put do |f| %>
+<%== form_with model: @price, url: admin_product_price_path(@product, @price), method: :put do |f| %>
   <p>
-    <%= f.label :price %>
-    <%= f.text_field :price, placeholder: "Add A New Price", value: nil %>
+    <%== f.label :price %>
+    <%== f.text_field :price, placeholder: "Add A New Price", value: nil %>
   </p>
   <!--  <p>-->
   <%#= f.label :link %>
   <%#= f.text_field :link %>
   <!--  </p>-->
-  <%= f.submit %>
+  <%== f.submit %>
 <% end %>

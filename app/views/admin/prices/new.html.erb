@@ -1,15 +1,15 @@
-<%= form_with model: @price, url: admin_product_prices_path(@product, @price), method: :post do |p| %>
+<%== form_with model: @price, url: admin_product_prices_path(@product, @price), method: :post do |p| %>
   <p>
-    <%= p.label :price %> <br>
-    <%= p.text_field :price, placeholder: "Add A New Price" %>
+    <%== p.label :price %> <br>
+    <%== p.text_field :price, placeholder: "Add A New Price" %>
   </p>
   <p>
-    <%= p.label :seller %> <br>
-    <%= p.text_field :seller, placeholder: "Add A New seller" %>
+    <%== p.label :seller %> <br>
+    <%== p.text_field :seller, placeholder: "Add A New seller" %>
   </p>
   <p>
-    <%= p.label :link %> <br>
-    <%= p.text_field :link, placeholder: "Add A New link" %>
+    <%== p.label :link %> <br>
+    <%== p.text_field :link, placeholder: "Add A New link" %>
   </p>
-  <%= p.submit %>
+  <%== p.submit %>
 <% end %>

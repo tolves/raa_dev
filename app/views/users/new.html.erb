@@ -1,22 +1,22 @@
 <h1>New User</h1>
 
 <h2>Add a New user:</h2>
-<%= form_for @user do |f| %>
+<%== form_for @user do |f| %>
   <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%== f.label :name %><br>
+    <%== f.text_field :name %>
   </p>
   <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
+    <%== f.label :password %><br>
+    <%== f.password_field :password %>
   </p>
   <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%== f.label :email %><br>
+    <%== f.text_field :email %>
   </p>
   <p>
-    <%= f.check_box("terms_of_service", :checked => false) %> Yes, I have read and consent to the terms and conditions.
+    <%== f.check_box("terms_of_service", :checked => false) %> Yes, I have read and consent to the terms and conditions.
   <p>
-    <%= f.submit %>
+    <%== f.submit %>
   </p>
 <% end %>

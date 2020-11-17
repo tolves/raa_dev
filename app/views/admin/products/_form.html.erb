@@ -1,28 +1,28 @@
-<%= form_with model: product, url: path, method: method do |f| %>
+<%== form_with model: product, url: path, method: method do |f| %>
   <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name, placeholder: "Add The Product Name" %>
+    <%== f.label :name %><br>
+    <%== f.text_field :name, placeholder: "Add The Product Name" %>
   </p>
   <p>
-    <%= f.label :brand_id %><br>
-    <%= f.collection_select :brand_id, Brand.all, :id, :name, prompt: "Pick a Brands" %>
+    <%== f.label :brand_id %><br>
+    <%== f.collection_select :brand_id, Brand.all, :id, :name, prompt: "Pick a Brands" %>
   </p>
   <p>
-    <%= f.label :category_id %><br>
-    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Pick a Category" %>
-    <%# <%= f.select(:category_id, @categories.map{|i| [i.name, i.id]}) %>
+    <%== f.label :category_id %><br>
+    <%== f.collection_select :category_id, Category.all, :id, :name, prompt: "Pick a Category" %>
+    <%# <%== f.select(:category_id, @categories.map{|i| [i.name, i.id]}) %>
   </p>
   <p>
-    <%= f.label :types %><br>
-    <%= f.text_field :types, placeholder: "Add The Product Type" %>
+    <%== f.label :types %><br>
+    <%== f.text_field :types, placeholder: "Add The Product Type" %>
   </p>
   <% if action_name == 'new' %>
-    <%= render partial: 'price', locals: {price: @prices, f: f} %>
+    <%== render partial: 'price', locals: {price: @prices, f: f} %>
   <% end %>
   <p>
-    <%= f.label :detail %><br>
-    <%= f.text_field :detail, placeholder: "Add The Product Details" %>
+    <%== f.label :detail %><br>
+    <%== f.text_field :detail, placeholder: "Add The Product Details" %>
   </p>
-  <%= f.submit %>
+  <%== f.submit %>
   </p>
 <% end %>

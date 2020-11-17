@@ -2,22 +2,22 @@
   <table>
     <tr>
       <td>
-        <%= link_to :Index, :root %>
-        <%= link_to :Back, :back %>
+        <%== link_to :Index, :root %>
+        <%== link_to :Back, :back %>
       </td>
       <% if current_user.admin? %>
         <td>
-          <h1>You are Logged In, <%= current_user.name %></h1>
-          <%= button_to 'Sign Out', :admin_logout, method: :post %>
+          <h1>You are Logged In, <%== current_user.name %></h1>
+          <%== button_to 'Sign Out', :admin_logout, method: :post %>
         </td>
         <td>
-          <%= button_to :Admin_Dashboard, :admin, method: :get %>
+          <%== button_to :Admin_Dashboard, :admin, method: :get %>
         </td>
         <td>
-          <%= button_to :products, :admin_products, method: :get %>
+          <%== button_to :products, :admin_products, method: :get %>
         </td>
         <td>
-          <%= button_to :users, :users, method: :get %>
+          <%== button_to :users, :users, method: :get %>
         </td>
       <% end %>
     </tr>

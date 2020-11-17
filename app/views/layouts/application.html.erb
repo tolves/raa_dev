@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RaaDev</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>RaaDev</title>
+  <%== csrf_meta_tags %>
+  <%== csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-  <body>
-    <% if session[:admin_id] %>
-      <%= render 'admin/header' %>
-    <%else%>
-      <%= render 'layouts/header' %>
-    <%end%>
-    <% flash.each do |type, msg| %>
-      <p><%= msg %></p>
-    <% end %>
-    <%= yield %>
-    <%= render 'layouts/footer' %>
-  </body>
-  <%console%>
+  <%== stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%== javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+<% if session[:admin_id] %>
+  <%== render 'admin/header' %>
+<% else %>
+  <%== render 'layouts/header' %>
+<% end %>
+<% flash.each do |type, msg| %>
+  <p><%== msg %></p>
+<% end %>
+<%== yield %>
+<%== render 'layouts/footer' %>
+</body>
+<% console %>
 </html>

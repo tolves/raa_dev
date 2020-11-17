@@ -1,16 +1,16 @@
 <p>
   <strong>name:</strong>
-  <%= @user.name %>
-</p>
- 
-<p>
-  <strong>password:</strong>
-  <%= @user.password %>
-</p>
- 
-<p>
-  <strong>salts:</strong>
-  <%= @user.salts %>
+  <%== @user.name %>
 </p>
 
-<p><%= link_to 'Update Profiles', :edit_user, method: :get %></p>
+<p>
+  <strong>password:</strong>
+  <%== @user.password %>
+</p>
+
+<p>
+  <strong>salts:</strong>
+  <%== @user.salts %>
+</p>
+
+<p><%== link_to 'Update Profiles', :edit_user, method: :get %></p>
