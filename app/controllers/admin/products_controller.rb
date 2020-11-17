@@ -42,6 +42,17 @@ class Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def destroy
+    @product = Product.find(params[:id])
+    if @product.destroy
+      flash.notice = 'Delete product successful'
+      redirect_to :admin_products
+    else
+      flash.alert = 'Delete product failed'
+      redirect_to admin_product_path(@product)
+    end
+  end
+
   private
 
   def product_params
