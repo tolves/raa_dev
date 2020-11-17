@@ -1,5 +1,29 @@
-<%= @product.inspect %><br>
-<%= button_to :add_price, new_admin_product_price_path(@product), method: :get %>
-<% @product.prices.each do |p| %>
-  <%= p.price %><br>
-<% end %>
+<%= button_to :Add_New_Seller, new_admin_product_price_path(@product), method: :get %>
+<div>
+  <p>Name: <%= @product.name %></p>
+  <p>Type: <%= @product.types %></p>
+  <p>Brand: <%= @product.brand.name %></p>
+  <p>Category: <%= @product.category.name %></p>
+  <p>Create_at: <%= @product.created_at %></p>
+  <p>Update_at: <%= @product.updated_at %></p>
+  <p>Detail: <%= @product.detail %></p>
+  <table>
+    <tr>
+      <th>Seller</th>
+      <th>Link</th>
+      <th>price</th>
+    </tr>
+    <% @product.prices.each do |p| %>
+      <tr>
+        <td><%= p.seller %></td>
+        <td><%= p.link %></td>
+        <td>
+          <% p.price.each do |item| %>
+            <%= item['updated_at'] %> -> <%= item['price'] %><br>
+          <% end %>
+        </td>
+        <td><%= button_to :add_new_price, edit_admin_product_price_path(@product, p), method: :get %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

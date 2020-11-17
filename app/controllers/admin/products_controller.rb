@@ -34,7 +34,7 @@ class Admin::ProductsController < ApplicationController
       redirect_to :admin_products
     else
       flash.notice = @product.errors.messages
-      redirect_to = :edit_admin_product
+      redirect_to :edit_admin_product
     end
   end
 
