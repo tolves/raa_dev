@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  validates :name, presence: true, length: {minimum: 2}
+  validates :name, presence: true, length: {minimum: 2}, uniqueness: {scope: :brand_id, message: 'One brand should have one unique product'}
   belongs_to :brand
   belongs_to :category
   has_many :prices
