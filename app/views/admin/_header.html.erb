@@ -7,20 +7,17 @@
       <td>
         <% if current_user.is_admin? %>
           <h1>You are Logged In, <%= current_user.name %></h1>
-          <%= button_to 'Sign Out', :admin_logout, method: :post%></td>
-        <%end%>
-      </td>
-      <td>
-        <%= button_to :Admin_Dashboard, :admin, method: :get %>
-      </td>
-
-    <td>
-      <%= link_to :admin_products_path, :admin_products%>
-    </td>
-    <td>
-      <%= link_to :users_path, :users%>
-    </td>
-
-    </tr>
+          <%= button_to 'Sign Out', :admin_logout, method: :post %></td>
+        <% end %>
+        <td>
+          <%= button_to :Admin_Dashboard, :admin, method: :get %>
+        </td>
+        <td>
+          <%= button_to :admin_products_path, :admin_products, method: :get %>
+        </td>
+        <td>
+          <%= button_to :users_path, :users, method: :get %>
+        </td>
+        </tr>
   </table>
 </div>

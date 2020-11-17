@@ -1,12 +1,13 @@
+require 'digest'
 class User < ApplicationRecord
   attribute :role #:is_admin?
   attribute :is_admin?
   validates_uniqueness_of :name, :email
 
-  validates :name, presence: true, length: { in: 2..32 }
-  validates :password, presence: true, length: { in: 2..32 }
-  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
-  validates :terms_of_service, acceptance: { message: 'must be abided' }
+  validates :name, presence: true, length: {in: 2..32}
+  validates :password, presence: true, length: {in: 2..32}
+  validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}
+  validates :terms_of_service, acceptance: {message: 'must be abided'}
 
   # PASSWORD_FORMAT = /\A
   # (?=.{8,})          # Must contain 8 or more characters
@@ -16,18 +17,18 @@ class User < ApplicationRecord
   # (?=.*[[:^alnum:]]) # Must contain a symbol
   # /x
 
-  # validates :password, 
-  #   presence: true, 
-  #   length: { in: Devise.password_length }, 
-  #   format: { with: PASSWORD_FORMAT }, 
-  #   confirmation: true, 
-  #   on: :create 
+  # validates :password,
+  #   presence: true,
+  #   length: { in: Devise.password_length },
+  #   format: { with: PASSWORD_FORMAT },
+  #   confirmation: true,
+  #   on: :create
 
-  # validates :password, 
-  #   allow_nil: true, 
-  #   length: { in: Devise.password_length }, 
-  #   format: { with: PASSWORD_FORMAT }, 
-  #   confirmation: true, 
+  # validates :password,
+  #   allow_nil: true,
+  #   length: { in: Devise.password_length },
+  #   format: { with: PASSWORD_FORMAT },
+  #   confirmation: true,
   #   on: :update
 
   before_save :encrypt_password

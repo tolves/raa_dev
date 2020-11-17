@@ -2,12 +2,12 @@ class SessionsController < ApplicationController
   skip_before_action :authorized
   skip_before_action :check_permission
 
-  def login
+  def login;
   end
 
   def create
     @user = User.find_by_name params[:name]
-    if @user && @user.authenticate(params[:password])
+    if @user&.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to :root
     else
@@ -21,11 +21,11 @@ class SessionsController < ApplicationController
     redirect_to :root
   end
 
-  
-  def permission_restriction
+  def permission_restriction;
   end
 
   private
-  def login_params
+
+  def login_params;
   end
 end

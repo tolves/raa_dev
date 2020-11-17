@@ -1,15 +1,16 @@
 class AdminController < ApplicationController
-  skip_before_action :authorized ,except: :index
-  skip_before_action :check_permission ,except: :index
-  def index
+  skip_before_action :authorized, except: :index
+  skip_before_action :check_permission, except: :index
+
+  def index;
   end
 
-  def login
+  def login;
   end
 
   def login_auth
     @admin = Admin.find_by_name params[:name]
-    if @admin && @admin.authenticate(params[:password])
+    if @admin&.authenticate(params[:password])
       session[:admin_id] = @admin.id
       session[:user_id] = nil
       redirect_to :admin
@@ -25,6 +26,7 @@ class AdminController < ApplicationController
   end
 
   private
-  def login_params
+
+  def login_params;
   end
 end

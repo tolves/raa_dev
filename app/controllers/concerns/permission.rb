@@ -8,10 +8,10 @@ module Permission
   def permissions
     {
       'products' => {
-        :user => [:index, :show],
+          :user => %i[index show]
       },
       'users' => {
-        :user => [:show, :update, :edit]
+          :user => %i[show update edit]
       },
       'admin' => {
       },
@@ -33,11 +33,11 @@ module Permission
     role = current_user.role
 
     if controller_permissions.keys.include?(role)
-      if !controller_permissions[role].include?(action_name.to_sym)
+      unless controller_permissions[role].include?(action_name.to_sym)
         flash.alert = 'You do not have enough permission'
         return redirect_to :permission_restriction
       end
-      
+
       if controller_name == 'users' && current_user != User.find(params[:id])
         flash.alert = 'You do not have enough permission'
         return redirect_to :permission_restriction

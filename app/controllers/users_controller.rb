@@ -36,7 +36,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-      @user.password, @user.email = user_params[:password], user_params[:email]
+    @user.password = user_params[:password]
+    @user.email = user_params[:email]
     if @user.save
       flash.notice = 'Change Profiles Successful'
       redirect_to :user
@@ -47,6 +48,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :password, :email, :terms_of_service)
   end
