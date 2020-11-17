@@ -1,5 +1,6 @@
 class Admin::PricesController < ApplicationController
   before_action :product
+  before_action :price, on: %i[edit, update, destroy]
 
   def index;
   end
@@ -19,12 +20,10 @@ class Admin::PricesController < ApplicationController
     end
   end
 
-  def edit
-    @price = @product.prices.find params[:id]
+  def edit;
   end
 
   def update
-    @price = @product.prices.find params[:id]
     if @price.update(price_params)
       flash.notice = 'Add New Price Successful'
       redirect_to admin_product_path @product
@@ -34,10 +33,23 @@ class Admin::PricesController < ApplicationController
     end
   end
 
+  def destroy
+    flash.notice = if @price.destroy
+                     'Delete price successful'
+                   else
+                     'Delete price failed'
+                   end
+    redirect_to admin_product_path(@product)
+  end
+
   private
 
   def product
     @product = Product.find params[:product_id]
+  end
+
+  def price
+    @price = @product.prices.find params[:id]
   end
 
   def product_params
