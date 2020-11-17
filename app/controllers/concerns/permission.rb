@@ -28,7 +28,7 @@ module Permission
 
 
   def check_permission
-    return true if current_user.is_admin?
+    return true if current_user.admin?
     controller_permissions = permissions[controller_path]
     role = current_user.role
 

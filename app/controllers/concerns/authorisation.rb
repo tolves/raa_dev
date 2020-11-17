@@ -16,8 +16,8 @@ module Authorisation
 
   def authorized
     if logged_in?
-      return true if current_user.is_admin?
-      return redirect_to :permission_restriction if !current_user.is_admin? && (controller_path.match(/^admin/))
+      return true if current_user.admin?
+      return redirect_to :permission_restriction if !current_user.admin? && (controller_path.match(/^admin/))
     else
       flash.notice = 'Login Please'
       return redirect_to :admin_login if controller_path.match(/^admin/)

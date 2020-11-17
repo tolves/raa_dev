@@ -1,7 +1,7 @@
 require 'digest'
 class User < ApplicationRecord
-  attribute :role #:is_admin?
-  attribute :is_admin?
+  attribute :role, :string, default: :user
+  attribute :admin?, :boolean, default: false
   validates_uniqueness_of :name, :email
 
   validates :name, presence: true, length: {in: 2..32}
@@ -37,13 +37,5 @@ class User < ApplicationRecord
     return unless password.present?
     self.salts = SecureRandom.hex
     self.password = Digest::MD5.hexdigest(password + salts)
-  end
-
-  def role
-    :user
-  end
-
-  def is_admin?
-    false
   end
 end
