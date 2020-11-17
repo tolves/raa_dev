@@ -7,13 +7,13 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_name params[:name]
-    if @user&.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect_to :root
-    else
-      flash.notice = 'Incorrect Password'
-      redirect_to :login
-    end
+    flash.notice, path = if @user&.authenticate(params[:password])
+                           session[:user_id] = @user.id
+                           ['Login Successful', :root]
+                         else
+                           ['Incorrect Password', :login]
+                         end
+    redirect_to path
   end
 
   def logout

@@ -2,12 +2,14 @@ require 'digest'
 class User < ApplicationRecord
   attribute :role, :string, default: :user
   attribute :admin?, :boolean, default: false
-  validates_uniqueness_of :name, :email
 
+  validates_uniqueness_of :name, :email
   validates :name, presence: true, length: {in: 2..32}
   validates :password, presence: true, length: {in: 2..32}
   validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}
   validates :terms_of_service, acceptance: {message: 'must be abided'}
+
+  before_save :encrypt_password
 
   # PASSWORD_FORMAT = /\A
   # (?=.{8,})          # Must contain 8 or more characters
@@ -31,10 +33,10 @@ class User < ApplicationRecord
   #   confirmation: true,
   #   on: :update
 
-  before_save :encrypt_password
 
   def encrypt_password
     return unless password.present?
+
     self.salts = SecureRandom.hex
     self.password = Digest::MD5.hexdigest(password + salts)
   end

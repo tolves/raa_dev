@@ -21,7 +21,8 @@ module Authorisation
     else
       flash.notice = 'Login Please'
       return redirect_to :admin_login if controller_path.match(/^admin/)
-      return redirect_to :login
+
+      redirect_to :login
     end
   end
 end

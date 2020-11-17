@@ -10,14 +10,14 @@ class AdminController < ApplicationController
 
   def login_auth
     @admin = Admin.find_by_name params[:name]
-    if @admin&.authenticate(params[:password])
-      session[:admin_id] = @admin.id
-      session[:user_id] = nil
-      redirect_to :admin
-    else
-      flash.notice = 'Incorrect password'
-      redirect_to :admin_login
-    end
+    flash.notice, path = if @admin&.authenticate(params[:password])
+                           session[:admin_id] = @admin.id
+                           session[:user_id] = nil
+                           ['Login Successful', :admin]
+                         else
+                           ['Incorrect Password', :admin_login]
+                         end
+    redirect_to path
   end
 
   def logout

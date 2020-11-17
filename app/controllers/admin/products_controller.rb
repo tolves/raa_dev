@@ -12,14 +12,12 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @price = @product.prices.build(price_params)
-
-    if @product.save
-      flash.notice = 'Add Product successful'
-      redirect_to :admin_products
-    else
-      flash.notice = @product.errors.messages.to_s + @price.errors.messages.to_s
-      redirect_to :new_admin_product
-    end
+    flash.notice, path = if @product.save
+                           ['Add Product Successful', :admin_products]
+                         else
+                           [@product.errors.messages.to_s + @price.errors.messages.to_s, :new_admin_product]
+                         end
+    redirect_to path
   end
 
   def edit
@@ -29,13 +27,12 @@ class Admin::ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    if @product.update(product_params)
-      flash.notice = 'Change Product Details Successful'
-      redirect_to :admin_products
-    else
-      flash.notice = @product.errors.messages
-      redirect_to :edit_admin_product
-    end
+    flash.notice, path = if @product.update(product_params)
+                           ['Change Product Details Successful', :admin_products]
+                         else
+                           [@product.errors.messages, :edit_admin_product]
+                         end
+    redirect_to path
   end
 
   def show
@@ -44,13 +41,12 @@ class Admin::ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
-    if @product.destroy
-      flash.notice = 'Delete product successful'
-      redirect_to :admin_products
-    else
-      flash.alert = 'Delete product failed'
-      redirect_to admin_product_path(@product)
-    end
+    flash.notice, path = if @product.destroy
+                           ['Delete product successful', :admin_products]
+                         else
+                           [@product.errors.messages, admin_product_path(@product)]
+                         end
+    redirect_to path
   end
 
   private

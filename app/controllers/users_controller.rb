@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, on: %i[new create]
-  skip_before_action :check_permission, on: %i[new create]
+  skip_before_action :authorized, only: %i[new create]
+  skip_before_action :check_permission, only: %i[new create]
 
   def index
     @user = User.all
@@ -13,7 +13,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-
   end
 
   def new
@@ -22,14 +21,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
-      flash.notice = 'Register User Successful'
-      session[:user_id] = @user.id
-      redirect_to :root
-    else
-      flash.notice = @user.errors
-      redirect_to :new_user
-    end
+    flash.notice, path = if @user.save
+                           session[:user_id] = @user.id
+                           ['Register User Successful', :root]
+                         else
+                           [@user.errors, :new_user]
+                         end
+    redirect_to path
   end
 
   def edit
@@ -38,15 +36,13 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.password = user_params[:password]
-    @user.email = user_params[:email]
-    if @user.save
-      flash.notice = 'Change Profiles Successful'
-      redirect_to :user
-    else
-      flash.notice = @user.errors.messages
-      render 'edit'
-    end
+    flash.notice, path = if @user.update(user_params)
+                           session[:user_id] = @user.id
+                           ['Change Profiles Successful', :user]
+                         else
+                           [@user.errors, :edit_user]
+                         end
+    redirect_to path
   end
 
   private

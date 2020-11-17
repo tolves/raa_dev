@@ -26,25 +26,24 @@ module Permission
     }
   end
 
-
   def check_permission
     return true if current_user.admin?
-    controller_permissions = permissions[controller_path]
-    role = current_user.role
 
+    controller_permissions = permissions[controller_path]
+    role = current_user.role.to_sym
+    alert = 'You do not have enough permission'
     if controller_permissions.keys.include?(role)
       unless controller_permissions[role].include?(action_name.to_sym)
-        flash.alert = 'You do not have enough permission'
+        flash.alert = alert
         return redirect_to :permission_restriction
       end
-
       if controller_name == 'users' && current_user != User.find(params[:id])
-        flash.alert = 'You do not have enough permission'
-        return redirect_to :permission_restriction
+        flash.alert = alert
+        redirect_to :permission_restriction
       end
     else
-      flash.alert = 'You do not have enough permission'
-      return redirect_to :permission_restriction
+      flash.alert = alert
+      redirect_to :permission_restriction
       # head 403
     end
   end

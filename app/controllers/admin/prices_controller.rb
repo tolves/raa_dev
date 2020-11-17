@@ -11,26 +11,24 @@ class Admin::PricesController < ApplicationController
 
   def create
     @price = @product.prices.build price_params
-    if @price.save
-      flash.notice = 'Add Seller Successful'
-      redirect_to admin_product_path @product
-    else
-      flash.notice = @price.errors.messages
-      redirect_to new_admin_product_price_path @product
-    end
+    flash.notice, path = if @price.save
+                           ['Add Seller Successful', admin_product_path(@product)]
+                         else
+                           [@price.errors.messages, new_admin_product_price_path(@product)]
+                         end
+    redirect_to path
   end
 
   def edit;
   end
 
   def update
-    if @price.update(price_params)
-      flash.notice = 'Add New Price Successful'
-      redirect_to admin_product_path @product
-    else
-      flash.notice = @price.errors.messages
-      redirect_to edit_admin_product_price_path @product, @price
-    end
+    flash.notice, path = if @price.update(price_params)
+                           ['Add New Price Successful', admin_product_path(@product)]
+                         else
+                           [@price.errors.messages, edit_admin_product_price_path(@product, @price)]
+                         end
+    redirect_to path
   end
 
   def destroy
