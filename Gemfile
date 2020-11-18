@@ -28,8 +28,11 @@ gem 'optimist', '~> 3.0', '>= 3.0.1'
 
 gem 'resque'
 
+# gem install rmagick  with administrator， should install imagemagick or GraphicsMagick first, and then gem install rmagick
+gem 'rmagick'
+
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

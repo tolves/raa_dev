@@ -15,6 +15,10 @@
     <%== f.text_field :email %>
   </p>
   <p>
+    <%== f.label :avator %><br>
+    <%== f.file_field :avatar %>
+  </p>
+  <p>
     <%== f.check_box("terms_of_service", :checked => false) %> Yes, I have read and consent to the terms and conditions.
   <p>
     <%== f.submit %>
