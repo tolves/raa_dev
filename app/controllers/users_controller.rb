@@ -3,10 +3,10 @@ class UsersController < ApplicationController
   skip_before_action :check_permission, only: %i[new create]
 
   def index
-    @user = User.all
+    @users = User.all
 
     respond_to do |format|
-      format.json { render json: @user }
+      format.json { render json: @users }
       format.html { render :index }
     end
   end
