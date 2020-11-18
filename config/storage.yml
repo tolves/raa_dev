@@ -8,6 +8,7 @@ local:
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
+# Add: gem "aws-sdk-s3", require: false
 #   service: S3
 #   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
 #   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
@@ -15,6 +16,7 @@ local:
 #   bucket: your_own_bucket
 
 # Remember not to checkin your GCS keyfile to a repository
+# gem "google-cloud-storage", "~> 1.11", require: false
 # google:
 #   service: GCS
 #   project: your_project
@@ -22,6 +24,7 @@ local:
 #   bucket: your_own_bucket
 
 # Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
+# gem "azure-storage", require: false
 # microsoft:
 #   service: AzureStorage
 #   storage_account_name: your_account_name
@@ -32,3 +35,24 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+
+#  Mirror Service
+#  s3_west_coast:
+#    service: S3
+#    access_key_id: ""
+#    secret_access_key: ""
+#    region: ""
+#    bucket: ""
+#
+#  s3_east_coast:
+#    service: S3
+#    access_key_id: ""
+#    secret_access_key: ""
+#    region: ""
+#    bucket: ""
+#
+#  production:
+#    service: Mirror
+#    primary: s3_east_coast
+#    mirrors:
+#      - s3_west_coast
