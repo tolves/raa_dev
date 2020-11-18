@@ -7,6 +7,14 @@
     <%== f.label :email %><br>
     <%== f.text_field :email %>
   </p>
+  <p>
+  <p>
+    <%== f.label :avator %><br>
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar.variant(resize_to_limit: [50, 100]) %><br>
+    <% end %>
+    <%== f.file_field :avatar %>
+  </p>
 
   <p>
     <%== f.submit %>
